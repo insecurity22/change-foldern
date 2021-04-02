@@ -28,7 +28,6 @@ def changeName(path, cName):
     for filename in os.listdir(path):
         try:
             # 확장자가 다르면 변경할 파일에서 제외
-            print(re.findall("\.[a-zA-Z0-9]*", filename)[0])
             if re.findall("\.[a-zA-Z0-9]*", filename)[0] != oExtension:
                 continue
 
@@ -86,7 +85,8 @@ def changeName(path, cName):
                 os.rename(path + filename, rename)
 
         except Exception as e:
-            print("--> 변경할 수 없습니다.\n")
+            print("변경할 수 없습니다.")
+            print("-------------------------\n")
         except IndexError:
             sys.exit()
 
