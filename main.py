@@ -2,15 +2,15 @@ import os
 import sys
 import re
 
-# ex. 17-2 -> summary0902
+# 17-2 -> summary0902
 
 path = "C:\\Users\\CT-Kang\\Desktop\\example\\"
-oName = "2"
-cName = "summary09"
+oName = "02"
+cName = "02"
 oMiddleText = "-"
-cMiddleText = ""
-oExtension = ".png"
-cExtension = ".png"
+cMiddleText = "_"
+oExtension = ".mp4"
+cExtension = ".mp4"
 
 # --- 인자값
 # 1. 이름을 변경하고 싶은 폴더 경로
@@ -26,11 +26,12 @@ def changeName(path, cName):
 
     count = 0
     for filename in os.listdir(path):
-        # 확장자가 다르면 변경할 파일에서 제외
-        if re.findall("\.[a-zA-Z0-9]*", filename)[0] != oExtension:
-            continue
-
         try:
+            # 확장자가 다르면 변경할 파일에서 제외
+            print(re.findall("\.[a-zA-Z0-9]*", filename)[0])
+            if re.findall("\.[a-zA-Z0-9]*", filename)[0] != oExtension:
+                continue
+
             print("\n-------------------------")
             print("[변경 전]")
             print("폴더 이름:", filename)
@@ -82,12 +83,12 @@ def changeName(path, cName):
                     
             # 변경
             if count == 1: # Y
-                print("\n전체 변경되었습니다.\n")
                 os.rename(path + filename, rename)
 
         except Exception as e:
             print("--> 변경할 수 없습니다.\n")
-
+        except IndexError:
+            sys.exit()
 
 if __name__ == "__main__":
     print("\n------------ 입력 값 확인 ----------------")
